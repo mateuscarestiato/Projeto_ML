@@ -101,7 +101,7 @@ ggplot(dados_clean, aes(x = Valuation)) +
                  fill = "steelblue", alpha = 0.7) +
   geom_density(color = "red", linewidth = 1) +
   labs(title = "Distribuição do Valuation",
-       subtitle = expression(paste("Shapiro-Wilk: ", italic(p), " < 2.2e-16")),
+       subtitle = expression(paste("Shapiro-Wilk: ", italic(p), " = 3.400928e-12")),
        x = "Valuation (US$ Mi)",
        y = "Densidade") +
   theme_minimal()
@@ -184,17 +184,11 @@ predicoes <- factor(ifelse(probabilidades > 0.5, 1, 0), levels = c(0, 1))
 # Matriz de confusão
 matriz_confusao <- table(Real = dados_class$Profitable, Predito = predicoes)
 
-# Métricas de performance
+# Métrica de performance
 acuracia <- sum(diag(matriz_confusao)) / sum(matriz_confusao)
-precisao <- matriz_confusao[2,2] / sum(matriz_confusao[,2])
-recall <- matriz_confusao[2,2] / sum(matriz_confusao[2,])
-f1 <- 2 * (precisao * recall) / (precisao + recall)
 
 cat("\n=== MÉTRICAS DE PERFORMANCE ===\n")
 cat("Acurácia:", round(acuracia, 3), "\n")
-cat("Precisão:", round(precisao, 3), "\n")
-cat("Recall:", round(recall, 3), "\n")
-cat("F1-Score:", round(f1, 3), "\n")
 cat("Matriz de Confusão:\n")
 print(matriz_confusao)
 
@@ -209,7 +203,7 @@ ggplot(dados_class, aes(x = Funding_Amount, y = as.numeric(as.character(Profitab
   geom_smooth(method = "glm", method.args = list(family = "binomial"), 
               color = "#E74C3C", se = FALSE) +
   scale_x_continuous(labels = dollar) +
-  labs(title = "Regressão Logística: Funding Amount vs Profitabilidade",
+  labs(title = "Regressão Logística: Funding Amount vs Profitable",
        subtitle = paste("Acurácia =", round(acuracia, 3)),
        x = "Valor Captado (US$ milhões)",
        y = "Probabilidade de Ser Lucrativo") +
