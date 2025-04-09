@@ -46,7 +46,7 @@ Este projeto foi desenvolvido como parte da Avaliação Parcial da disciplina de
 7. **API REST com R**  
    - Endpoint `/predicao`: recebe valor X e retorna Y (modelo de regressão linear)  
    - Endpoint `/classificacao`: recebe valor X e retorna classe prevista (modelo logístico)  
-   - Documentação opcional com Swagger
+   - Documentação Swagger
 
 ## 🚀 Como Executar
 
